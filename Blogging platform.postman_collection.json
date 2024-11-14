@@ -1,0 +1,373 @@
+{
+	"info": {
+		"_postman_id": "0a16383f-972b-413d-9fd2-2594b67c5651",
+		"name": "Blogging platform",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "18509969"
+	},
+	"item": [
+		{
+			"name": "post register",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"query\": \"mutation Register($username: String!, $email: String!, $password: String!) { register(username: $username, email: $email, password: $password) { id username email } }\",\n  \"variables\": {\n    \"username\": \"john_doe\",\n    \"email\": \"john@mailinator.com\",\n    \"password\": \"password123\"\n  }\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:4000/graphql",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"query\": \"mutation Login($email: String!, $password: String!) { login(email: $email, password: $password) { token } }\",\n  \"variables\": {\n    \"email\": \"john@mailinator.com\",\n    \"password\": \"password123\"\n  }\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:4000/graphql",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"graphql"
+					]
+				},
+				"description": "Post login"
+			},
+			"response": []
+		},
+		{
+			"name": "Post(Mutation)",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NzMwNWFlNWQzYmJlMWQzOGZlZTNjMzAiLCJpYXQiOjE3MzEyMjI0NDQsImV4cCI6MTczMTMwODg0NH0.m4SnPFwzAKhUccbXpHi0-cWJf4t7FlUUiz9qGfchVF0",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"query\": \"mutation CreatePost($title: String!, $content: String!) { createPost(title: $title, content: $content) { id title content } }\",\n  \"variables\": {\n    \"title\": \"My First Post\",\n    \"content\": \"This is the content of my first post\"\n  }\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:4000/graphql",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Comment to a Post (Mutation)",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NzMwNWFlNWQzYmJlMWQzOGZlZTNjMzAiLCJpYXQiOjE3MzEyMjI0NDQsImV4cCI6MTczMTMwODg0NH0.m4SnPFwzAKhUccbXpHi0-cWJf4t7FlUUiz9qGfchVF0",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"query\": \"mutation AddComment($postId: ID!, $content: String!) { addComment(postId: $postId, content: $content) { id content author { username } } }\",\n  \"variables\": {\n    \"postId\": \"67305d24d3bbe1d38fee3c33\",\n    \"content\": \"This is a comment on the post\"\n  }\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:4000/graphql",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Edit a Post (Mutation)",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NzMwNWFlNWQzYmJlMWQzOGZlZTNjMzAiLCJpYXQiOjE3MzEyMjY4NjIsImV4cCI6MTczMTMxMzI2Mn0.f05yxFRn563ymcx4mG4VzDiLiCrY8onedLcMuBdYwbQ",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"query\": \"mutation EditPost($id: ID!, $title: String, $content: String) { editPost(id: $id, title: $title, content: $content) { id title content } }\",\n    \"variables\": {\n        \"id\": \"67305d24d3bbe1d38fee3c33\",  \n        \"title\": \"Updated Post Title 2\",\n        \"content\": \"This is the updated content of my first post\"\n    }\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:4000/graphql",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Edit a Comment (Mutation)",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NzMwNWFlNWQzYmJlMWQzOGZlZTNjMzAiLCJpYXQiOjE3MzEyMjY4NjIsImV4cCI6MTczMTMxMzI2Mn0.f05yxFRn563ymcx4mG4VzDiLiCrY8onedLcMuBdYwbQ",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"query\": \"mutation EditComment($id: ID!, $content: String!) { editComment(id: $id, content: $content) { id content author { username } } }\",\n  \"variables\": {\n    \"id\": \"67305db7d3bbe1d38fee3c36\",\n    \"content\": \"Updated comment content\"\n  }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:4000/graphql",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete a Post (Mutation)",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NzMwNWFlNWQzYmJlMWQzOGZlZTNjMzAiLCJpYXQiOjE3MzEyMjY4NjIsImV4cCI6MTczMTMxMzI2Mn0.f05yxFRn563ymcx4mG4VzDiLiCrY8onedLcMuBdYwbQ",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"query\": \"mutation DeletePost($id: ID!) { deletePost(id: $id) }\",\n  \"variables\": {\n    \"id\": \"67305d24d3bbe1d38fee3c33\"\n  }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:4000/graphql",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete a Comment (Mutation)",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NzMwNWFlNWQzYmJlMWQzOGZlZTNjMzAiLCJpYXQiOjE3MzEyMjY4NjIsImV4cCI6MTczMTMxMzI2Mn0.f05yxFRn563ymcx4mG4VzDiLiCrY8onedLcMuBdYwbQ",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"query\": \"mutation DeleteComment($id: ID!) { deleteComment(id: $id) }\",\n  \"variables\": {\n    \"id\": \"673081cf4eccb776d3e0eb9a\"\n  }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:4000/graphql",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get a Post with Comments (Query)",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NzMwNWFlNWQzYmJlMWQzOGZlZTNjMzAiLCJpYXQiOjE3MzEyMjY4NjIsImV4cCI6MTczMTMxMzI2Mn0.f05yxFRn563ymcx4mG4VzDiLiCrY8onedLcMuBdYwbQ",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"query\": \"query GetPost($id: ID!) { getPost(id: $id) { id title content author { username } comments { id content author { username } } } }\",\n  \"variables\": {\n    \"id\": \"67307f1ea6ad366571328e3d\"\n  }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:4000/graphql",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Quert ListPosts with pagenation and totalcounts",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NzMwNWFlNWQzYmJlMWQzOGZlZTNjMzAiLCJpYXQiOjE3MzEyMjY4NjIsImV4cCI6MTczMTMxMzI2Mn0.f05yxFRn563ymcx4mG4VzDiLiCrY8onedLcMuBdYwbQ",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"query\": \"query ListPosts($page: Int!, $limit: Int!) { listPosts(page: $page, limit: $limit) { posts { id title content author { id username } comments { id content author { id username } } } totalCount } }\",\n  \"variables\": {\n    \"page\": 1,\n    \"limit\": 10\n  }\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:4000/graphql",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "query get post ",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NzMwNWFlNWQzYmJlMWQzOGZlZTNjMzAiLCJpYXQiOjE3MzEyMjY4NjIsImV4cCI6MTczMTMxMzI2Mn0.f05yxFRn563ymcx4mG4VzDiLiCrY8onedLcMuBdYwbQ",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"query\": \"query { getPost(id: \\\"6730ea1a00619a91d0018b19\\\") { id title content author { username } comments { id content author { username } } } }\"\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:4000/graphql",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
